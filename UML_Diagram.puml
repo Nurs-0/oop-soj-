@@ -1,0 +1,53 @@
+
+@startuml
+
+title Student Management System
+
+class Person {
+    # name : string
+    # age : int
+    + Person(n : string, a : int)
+}
+
+class Student {
+    - id : int
+    - count : static int
+    + Student(n : string, a : int, i : int)
+    + showInfo() : void
+    + getCount() : static int
+    + showPrivate(s : Student) : friend
+}
+
+class Group {
+    - students : Student*
+    - size : int
+    - info : Info
+    + Group(arr : Student[], n : int)
+    + showGroup() : void
+}
+
+class Info {
+    + show() : void
+}
+
+Person <|-- Student : Inheritance
+
+Group o-- Student : Aggregation
+Group *-- Info : Composition
+
+Student ..> Group : Friend class
+Student ..> showPrivate : Friend function
+
+note right of Student
+  Static member:
+  count
+
+  Static method:
+  getCount()
+end note
+
+note bottom of Group
+  Info — nested class
+end note
+
+@enduml
